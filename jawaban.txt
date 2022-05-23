@@ -1,0 +1,91 @@
+1. Buat Database
+CREATE DATABASE `myshop` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+2. Buat Tabel
+-- myshop.users definition
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- myshop.categories definition
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+
+-- myshop.items definition
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `items_FK` FOREIGN KEY (`id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+3. Insert ke Tabel users
+INSERT INTO myshop.users
+(name, email, password)
+VALUES('John Doe', 'john@doe.com', 'john123');
+
+INSERT INTO myshop.users
+(name, email, password)
+VALUES('Jane Doe', 'jane@doe.com', 'jenita123');
+
+4. Insert ke Tabel categories
+INSERT INTO myshop.categories
+(name)
+VALUES('gadget');
+
+INSERT INTO myshop.categories
+(name)
+VALUES('cloth');
+
+INSERT INTO myshop.categories
+(name)
+VALUES('men');
+
+INSERT INTO myshop.categories
+(name)
+VALUES('women');
+
+INSERT INTO myshop.categories
+(name)
+VALUES('branded');
+
+5. Insert ke tabel items
+INSERT INTO myshop.items
+(name, description, price, stock)
+VALUES('Sumsang b50', 'hape keren dari merek sumsang', 4000000, 100);
+
+INSERT INTO myshop.items
+(name, description, price, stock)
+VALUES('Uniklooh', 'baju keren dari brand ternama', 500000, 50);
+
+INSERT INTO myshop.items
+(name, description, price, stock)
+VALUES('IMHO Watch', 'jam tangan anak yang jujur banget', 2000000, 10);
+
+6. Mengambil data users
+SELECT name, email FROM users;
+
+7. Mengambil data dengan harga di atas 1000000
+SELECT * FROM items WHERE price > 1000000;
+
+8. Mengambil data dengan LIKE
+SELECT * FROM items WHERE name LIKE '%sang%';
+
+9. Menampilkan data items dengan join
+SELECT * FROM items INNER JOIN categories;
+
+10. Mengubah data dari database
+UPDATE items SET price = 2500000 WHERE name = 'Sumsang b50';
